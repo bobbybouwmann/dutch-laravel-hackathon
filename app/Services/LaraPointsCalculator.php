@@ -19,7 +19,7 @@ class LaraPointsCalculator
 
         $certificationScore = $this->calculateScoreForPlatform($user->certificate);
 
-        return ($laracastScore + $packagistScore + $certificationScore);
+        return $laracastScore + $packagistScore + $certificationScore;
     }
 
     /**
@@ -31,24 +31,24 @@ class LaraPointsCalculator
     {
         return [
             'Laracast' => [
-                'experience'            =>  1/2000,
-                'lessons'               =>  1/20,
-                'best_replies'          =>  1,
-                'badge_beginner'        =>  1,
-                'badge_intermediate'    => 1,
-                'badge_advanced'        => 1,
+                'experience' => 1 / 2000,
+                'lessons' => 1 / 20,
+                'best_replies' => 1,
+                'badge_beginner' => 1,
+                'badge_intermediate' => 1,
+                'badge_advanced' => 1,
             ],
 
             'Package' => [
-                'number_of_packages'    => 3,
-                'downloads_total'       => 1/1000,
-                'github_stars'          => 1/10,
-                'package_dependents'    => 1/10,
-                'favers'                => 1/10,
+                'number_of_packages' => 3,
+                'downloads_total' => 1 / 1000,
+                'github_stars' => 1 / 10,
+                'package_dependents' => 1 / 10,
+                'favers' => 1 / 10,
             ],
 
-            'Certificate'             => [
-                'valid'     => 100,
+            'Certificate' => [
+                'valid' => 100,
             ],
         ];
     }
@@ -58,7 +58,7 @@ class LaraPointsCalculator
      * The basename of the underlying class is reflected in the
      * keys of the scoreTable array
      *
-     * @param $platform Laracast|Package|Certificate
+     * @param Laracast $platform|Package|Certificate
      * @return float
      */
     private function calculateScoreForPlatform($platform)
