@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Certificate;
 use App\Laracast;
 use App\Package;
