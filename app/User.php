@@ -57,6 +57,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Package::class);
     }
 
+    public function forge(): HasOne
+    {
+        return $this->hasOne(Forge::class);
+    }
+
     public function scopeVerified(Builder $query): Builder
     {
         return $query->whereNotNull('email_verified_at');

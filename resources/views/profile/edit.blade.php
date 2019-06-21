@@ -58,6 +58,23 @@
                         </div>
 
                         <div class="flex flex-wrap mb-6">
+                            <label for="forge" class="block text-gray-700 text-sm font-bold mb-2">
+                                {{ __('Forge API token') }}
+                            </label>
+
+                            <input id="forge" type="text"
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline{{ $errors->has('forge') ? ' border-red-500' : '' }}"
+                                   name="forge"
+                                   value="{{ old('forge', $user->forge ? $user->forge->api_token : null) }}">
+
+                            @if ($errors->has('forge'))
+                                <p class="text-red-500 text-xs italic mt-4">
+                                    {{ $errors->first('forge') }}
+                                </p>
+                            @endif
+                        </div>
+
+                        <div class="flex flex-wrap mb-6">
                             <label for="date" class="block text-gray-700 text-sm font-bold mb-2">
                                 {{ __('Date of Laravel Certification') }}
                             </label>

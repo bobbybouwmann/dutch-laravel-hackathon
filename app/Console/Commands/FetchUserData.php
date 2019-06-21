@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Jobs\SyncCertification;
+use App\Jobs\SyncForge;
 use App\Jobs\SyncLaracast;
 use App\Jobs\SyncPackagist;
 use App\User;
@@ -39,6 +40,7 @@ class FetchUserData extends Command
             dispatch(new SyncCertification($user));
             dispatch(new SyncLaracast($user));
             dispatch(new SyncPackagist($user));
+            dispatch(new SyncForge($user));
         });
     }
 }
