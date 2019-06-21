@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Services\LaravelCertificateValidationService;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +13,13 @@ use App\Services\LaravelCertificateValidationService;
 |
 */
 
+use App\Services\LaravelCertificateValidationService;
+
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/cert', function () {
     $laravelCertificationInfo = new LaravelCertificateValidationService('Bobby Bouwmann', '2018-01-26');
 
     echo $laravelCertificationInfo->isValid();
