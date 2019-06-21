@@ -16,7 +16,10 @@ class DashboardController extends Controller
      */
     public function index(): View
     {
-        $users = User::with(['laracast', 'forge', 'package', 'certificate'])->orderBy('larapoints', 'desc')->take(10)->get();
+        $users = User::with(['laracast', 'forge', 'package', 'certificate'])
+            ->orderBy('larapoints', 'desc')
+            ->take(50)
+            ->get();
 
         return view('leaderboard', compact('users'));
     }
