@@ -1,30 +1,77 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
-@section('content')
-    <div class="flex items-center">
-        <div class="md:w-1/2 md:mx-auto">
+@section ('content')
+    <div class="container mx-auto w-full">
+        <div class="mx-auto p-2">
 
-            @if (session('status'))
-                <div class="text-sm border border-t-8 rounded text-green-700 border-green-600 bg-green-100 px-3 py-4 mb-4" role="alert">
-                    {{ session('status') }}
+            <h1 class="mb-6 text-5xl text-center leading-loose font-base">
+                Profile of <span class="font-bold">{{ $user->name }}</span>
+            </h1>
+
+            @if ($user->laracast instanceof \App\Laracast)
+                <div class="flex flex-wrap justify-center w-full">
+                    <div class="max-w-md w-full rounded bg-white overflow-hidden shadow-lg mb-6 mr-4">
+                        <div class="px-6 py-4 flex">
+                            <div class="ml-2">
+                                <div class="font-bold text-3xl mb-4">Laracasts</div>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Lessons completed: <span class="font-bold">{{ $user->laracast->lessons }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endif
 
-            <div class="flex flex-col break-words bg-white border border-2 rounded shadow-md">
-
-                <div class="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
-                    Laracasts
+            @if ($user->certificate instanceof \App\Certificate)
+                <div class="flex flex-wrap justify-center w-full">
+                    <div class="max-w-md w-full rounded bg-white overflow-hidden shadow-lg mb-6 mr-4">
+                        <div class="px-6 py-4 flex">
+                            <div class="ml-2">
+                                <div class="font-bold text-3xl mb-4">Certification</div>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Completed on
+                                    <span class="font-bold">{{ $user->certificate->date_of_certification->format('Y-m-d') }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            @endif
 
-                <div class="w-full p-6">
-                    <ul class="text-gray-700">
-                        <lu>Username: {{ $laracast->username }}</lu>
-                        <li>Experience: {{ $laracast->experience }}</li>
-                        <li>Lessons: {{ $laracast->lessons }}</li>
-                        <li>Best replies: {{ $laracast->best_replies }}</li>
-                    </ul>
+            @if ($user->forge instanceof \App\Forge)
+                <div class="flex flex-wrap justify-center w-full">
+                    <div class="max-w-md w-full rounded bg-white overflow-hidden shadow-lg mb-6 mr-4">
+                        <div class="px-6 py-4 flex">
+                            <div class="ml-2">
+                                <div class="font-bold text-3xl mb-4">Forge</div>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Servers: <span class="font-bold">{{ $user->forge->servers }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Sites: <span class="font-bold">{{ $user->forge->sites }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endif
+
+            @if ($user->package instanceof \App\Package)
+                <div class="flex flex-wrap justify-center w-full">
+                    <div class="max-w-md w-full rounded bg-white overflow-hidden shadow-lg mb-6 mr-4">
+                        <div class="px-6 py-4 flex">
+                            <div class="ml-2">
+                                <div class="font-bold text-3xl mb-4">Packagist</div>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Github stars: <span class="font-bold">{{ $user->package->github_stars }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
         </div>
     </div>
 @endsection

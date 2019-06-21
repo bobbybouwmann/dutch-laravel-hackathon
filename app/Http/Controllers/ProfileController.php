@@ -26,14 +26,9 @@ class ProfileController extends Controller
 
     public function show(User $user): View
     {
-        $view = view('profile.show');
+        $user->load(['laracast', 'certificate', 'forge', 'package']);
 
-        $view->user = $user;
-        $view->laracast = $user->laracast;
-        $view->certificate = $user->certificate;
-        //$view->forge = $user->forge;
-
-        return $view;
+        return view('profile.show', compact('user'));
     }
 
     public function edit(): View
