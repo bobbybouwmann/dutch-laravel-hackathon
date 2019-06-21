@@ -46,8 +46,3 @@ Route::get('/forge', function (ForgeExtractor $forgeExtractor) {
     dd($forgeExtractor->getStatsForApiKey($token));
 });
 
-Route::get('/leaderboard', function () {
-    $users = App\User::orderBy('larapoints', 'desc')->take(10)->get();
-
-    return view('leaderboard', compact('users'));
-});

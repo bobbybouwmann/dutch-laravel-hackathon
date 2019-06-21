@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -15,6 +16,8 @@ class DashboardController extends Controller
      */
     public function index(): View
     {
-        return view('dashboard');
+        $users = User::orderBy('larapoints', 'desc')->take(10)->get();
+
+        return view('leaderboard', compact('users'));
     }
 }
