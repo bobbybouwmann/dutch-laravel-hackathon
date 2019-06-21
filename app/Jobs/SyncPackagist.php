@@ -18,6 +18,13 @@ class SyncPackagist implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 1;
+
+    /**
      * @var User
      */
     private $user;
@@ -48,7 +55,7 @@ class SyncPackagist implements ShouldQueue
 
         $data = $packagistExtractor->getStatsForVendor($package->vendor);
         $statistics = $data['stats'];
-        
+
         $this->user->package->update([
             'number_of_packages' => $statistics['number_of_packages'],
             'github_stars' => $statistics['github_stars'],

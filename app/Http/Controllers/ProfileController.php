@@ -36,7 +36,7 @@ class ProfileController extends Controller
             if ($user->certificate instanceof Certificate) {
                 $user->certificate->update(['date_of_certification' => $request->get('date')]);
             } else {
-                $user->certificate()->create(['date_of_certification', $request->get('date')]);
+                $user->certificate()->create(['date_of_certification' => $request->get('date')]);
             }
         }
 
@@ -44,7 +44,7 @@ class ProfileController extends Controller
             if ($user->laracast instanceof Laracast) {
                 $user->laracast->update(['username' => $request->get('laracast')]);
             } else {
-                $user->laracast()->create(['username', $request->get('laracast')]);
+                $user->laracast()->create(['username' => $request->get('laracast')]);
             }
         }
 
@@ -52,7 +52,7 @@ class ProfileController extends Controller
             if ($user->package instanceof Package) {
                 $user->package->update(['vendor' => $request->get('vendor')]);
             } else {
-                $user->package()->create(['vendor', $request->get('vendor')]);
+                $user->package()->create(['vendor' => $request->get('vendor')]);
             }
         }
 
@@ -60,7 +60,7 @@ class ProfileController extends Controller
             if ($user->forge instanceof Forge) {
                 $user->forge->update(['api_token' => $request->get('forge')]);
             } else {
-                $user->forge()->create(['api_token', $request->get('forge')]);
+                $user->forge()->create(['api_token' => $request->get('forge')]);
             }
         }
 
