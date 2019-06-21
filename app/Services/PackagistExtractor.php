@@ -44,12 +44,10 @@ class PackagistExtractor
         return $packagesList->map(function ($vendorPackage) {
             return $this->packagist->findPackageByName($vendorPackage)['package'];
         })->filter(function ($package) {
-            foreach ($package['versions'] as $version => $versionDetails) {
-                if (!Str::contains($version, 'dev')) {
-                    if (Str::contains('laravel', $versionDetails['keywords'])) {
-                        return true;
-                    }
-                }
+            $version = collect($package['versions'])->first();
+
+            if (Str::contains('laravel', $version['keywords'])) {
+                return true;
             }
 
             return false;

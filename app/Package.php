@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Package extends Model
 {
     protected $fillable = [
+        'vendor',
         'number_of_packages',
         'github_stars',
         'favers',
@@ -18,8 +19,6 @@ class Package extends Model
         'downloads_monthly',
         'downloads_daily',
     ];
-
-    protected $dates = ['date_of_certification'];
 
     public function user(): BelongsTo
     {
