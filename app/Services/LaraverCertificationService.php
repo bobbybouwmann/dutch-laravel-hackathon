@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use Spatie\Browsershot\Browsershot;
+use GuzzleHttp\Client;
 
 class LaravelCertificateValidationService
 {
@@ -14,12 +14,18 @@ class LaravelCertificateValidationService
 
     public $certInfo;
 
+    public $client;
+
+    public $url;
+
     public function __construct($name, $date)
     {
         $name = mb_strtolower($name);
         $name = str_replace(' ', '-', $name);
 
-        $this->certInfo = $this->getCertificationInfo($name, $date);
+        $this->client = new Client;
+        $this->url = sprintf(static::CERT_URL, $name, $date);
+        $this->certInfo = $this->getCertificationInfo();
     }
 
     public function isValid()
@@ -31,10 +37,12 @@ class LaravelCertificateValidationService
         return false;
     }
 
-    private function getCertificationInfo($name, $date)
+    private function getCertificationInfo()
     {
-        $url = sprintf(static::CERT_URL, $name, $date);
-        
-        return Browsershot::url($url)->bodyHtml();
+        $response = $this->client->get($this->url);
+
+        if ($response->getStatusCode() === 200) {
+            return $response->getBody()->getContents();
+        }
     }
 }
