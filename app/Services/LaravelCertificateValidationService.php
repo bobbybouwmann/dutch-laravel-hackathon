@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 
 class LaravelCertificateValidationService
@@ -22,10 +23,10 @@ class LaravelCertificateValidationService
         $this->client = $client;
     }
 
-    public function validateFor($name, $date): bool
+    public function validateFor(string $name, Carbon $date): bool
     {
         $name = str_replace(' ', '-', mb_strtolower($name));
-        $url = sprintf(static::CERT_URL, $name, $date);
+        $url = sprintf(static::CERT_URL, $name, $date->format('Y-m-d'));
 
         $info = $this->getCertificationForUrl($url);
 
@@ -36,7 +37,7 @@ class LaravelCertificateValidationService
         return false;
     }
 
-    private function getCertificationForUrl($url): string
+    private function getCertificationForUrl(string $url): string
     {
         $response = $this->client->get($url);
 
