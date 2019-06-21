@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Certificate;
+use App\Forge;
 use App\Laracast;
 use App\Package;
 use App\User;
@@ -23,6 +24,7 @@ class UsersTableSeeder extends Seeder
             factory(Laracast::class)->create(['user_id' => $user->id]);
             factory(Package::class)->create(['user_id' => $user->id]);
             factory(Certificate::class)->create(['user_id' => $user->id]);
+            factory(Forge::class)->create(['user_id' => $user->id]);
         });
     }
 }
