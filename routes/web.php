@@ -41,3 +41,11 @@ Route::get('/packagist/{vendorName}', function (PackagistExtractor $packagistExt
 Route::get('/laracasts/{username}', function (LaracastsScraper $scraper, string $username) {
     return $scraper->getDataFor($username)->statistics();
 });
+
+Route::get('/leaderboard', function () {
+
+    $users = App\User::orderBy('larapoints', 'desc')->take(10)->get();
+
+    return view('leaderboard', compact('users'));
+});
+
