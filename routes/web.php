@@ -13,6 +13,8 @@ declare(strict_types=1);
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use App\Services\LaracastsScraper;
+
+Route::get('/laracasts/{username}', function (LaracastsScraper $scraper, string $username) {
+    return $scraper->getDataFor($username)->statistics();
 });
