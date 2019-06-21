@@ -8,7 +8,7 @@ intro:
 usage:
 	@echo "Project:"
 	@echo "  make init                        Initialise the project for development."
-	@echo "  make run                         Run the project for development."
+	@echo "  make serve                       Run the project for development."
 	@echo "\nEnvironment:"
 	@echo "  make watch                       Start the file watchers for development."
 	@echo "  make migrate                     Rebuild the database from scratch and run migrations + seeds."
@@ -23,7 +23,7 @@ usage:
 # ===========================
 
 init: intro do_prepare_backend do_init do_prepare_frontend
-run: intro do_run
+serve: intro do_serve
 update: intro do_prepare_backend do_prepare_frontend do_migrate
 watch: intro do_run_develop
 migrate: intro do_migrate
@@ -47,8 +47,8 @@ do_migrate:
 do_tinker:
 	php artisan tinker
 
-do_run:
-	php artisan serve &
+do_serve:
+	php artisan serve
 
 do_tests:
 ifdef filter
