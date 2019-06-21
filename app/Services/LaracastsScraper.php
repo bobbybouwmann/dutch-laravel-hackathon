@@ -21,13 +21,12 @@ class LaracastsScraper
         try {
             $response = $this->client->request('GET', "https://laracasts.com/@{$username}");
             $this->html = (string) $response->getBody();
-
         } catch (\Exception $e) {
-            return new NullLaracastsScraper;
+            return new NullLaracastsScraper();
         }
 
         if ($this->match($this->statsRegex()) === []) {
-            return new NullLaracastsScraper;
+            return new NullLaracastsScraper();
         }
 
         return $this;
@@ -38,25 +37,25 @@ class LaracastsScraper
         $matches = $this->match($this->statsRegex());
 
         return [
-            'experience'    => $matches[0],
-            'lessons'       => $matches[1],
-            'best_replies'  => $matches[2],
-            'badges'        => $this->badges(),
+            'experience' => $matches[0],
+            'lessons' => $matches[1],
+            'best_replies' => $matches[2],
+            'badges' => $this->badges(),
         ];
     }
 
     protected function badges()
     {
         $levels = collect([
-            'beginner'          => 'is-beginner',
-            'intermediate'      => 'is-intermediate',
-            'advanced'          => 'is-advanced',
+            'beginner' => 'is-beginner',
+            'intermediate' => 'is-intermediate',
+            'advanced' => 'is-advanced',
         ]);
 
         $awardedBadges = $this->match($this->awardedBadgesRegex());
 
         $badges = $levels->map(function ($level) use ($awardedBadges) {
-            return count(array_keys($awardedBadges, $level));
+            return count(array_keys($awardedBadges, $level, true));
         })->all();
 
         $badges['total'] = count($awardedBadges);
