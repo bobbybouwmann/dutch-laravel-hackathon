@@ -56,7 +56,7 @@ class SyncCertification implements ShouldQueue
                 $certificate->date_of_certification
             );
 
-            if ($status === true && ! $this->user->certificate->valid) {
+            if ($status === true && !$this->user->certificate->valid) {
                 $this->user->certificate->update([
                     'valid' => true,
                 ]);
@@ -82,5 +82,4 @@ class SyncCertification implements ShouldQueue
             'valid' => false,
         ]);
     }
-
 }
