@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Certificate;
 use App\Laracast;
-use App\Package;
 use App\User;
+use Illuminate\Database\Eloquent\Model;
 
 class LaraPointsCalculator
 {
-    public function calculateForUser(User $user)
+    public function calculateForUser(User $user): float
     {
         $laracastScore = $this->calculateScoreForPlatform($user->laracast);
 
@@ -19,7 +18,9 @@ class LaraPointsCalculator
 
         $certificationScore = $this->calculateScoreForPlatform($user->certificate);
 
-        return $laracastScore + $packagistScore + $certificationScore;
+        $forgeScore = $this->calculateScoreForPlatform($user->forge);
+
+        return round($laracastScore + $packagistScore + $certificationScore + $forgeScore);
     }
 
     /**
@@ -27,7 +28,7 @@ class LaraPointsCalculator
      *
      * @return array
      */
-    private function scoreLookup()
+    private function scoreLookup(): array
     {
         return [
             'Laracast' => [
@@ -50,6 +51,11 @@ class LaraPointsCalculator
             'Certificate' => [
                 'valid' => 100,
             ],
+
+            'Forge' => [
+                'servers' => 10,
+                'sites' => 10,
+            ],
         ];
     }
 
@@ -58,11 +64,15 @@ class LaraPointsCalculator
      * The basename of the underlying class is reflected in the
      * keys of the scoreTable array
      *
-     * @param Laracast $platform|Package|Certificate
+     * @param Laracast $platform |Package|Certificate
      * @return float
      */
-    private function calculateScoreForPlatform($platform)
+    private function calculateScoreForPlatform($platform): float
     {
+        if (!$platform instanceof Model) {
+            return 0;
+        }
+
         $points = collect($this->scoreLookup()[class_basename($platform)])
             ->map(function ($points, $scoreableProperty) use ($platform) {
                 return $platform->{$scoreableProperty} * $points;
