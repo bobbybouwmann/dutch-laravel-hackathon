@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 use App\Services\LaravelCertificateValidationService;
 use App\Services\PackagistExtractor;
+use App\Services\LaracastsScraper;
 
 Auth::routes(['verify' => true]);
 
@@ -32,4 +33,8 @@ Route::get('/cert', function () {
 
 Route::get('/packagist/{vendorName}', function (PackagistExtractor $packagistExtractor, string $vendorName) {
     dd($packagistExtractor->getStatsForVendor($vendorName));
+});
+
+Route::get('/laracasts/{username}', function (LaracastsScraper $scraper, string $username) {
+    return $scraper->getDataFor($username)->statistics();
 });
