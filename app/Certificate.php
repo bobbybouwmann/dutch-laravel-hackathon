@@ -18,6 +18,10 @@ class Certificate extends Model
         'date_of_certification',
     ];
 
+    protected $casts = [
+        'valid' => 'boolean',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
