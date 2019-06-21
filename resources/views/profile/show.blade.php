@@ -8,6 +8,14 @@
                 Profile of <span class="font-bold">{{ $user->name }}</span>
             </h1>
 
+            @if ($user->id === auth()->id())
+                <div class="text-center mb-12">
+                    <a href="{{ route('profile.edit', $user) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Edit profile
+                    </a>
+                </div>
+            @endif
+
             @if ($user->laracast instanceof \App\Laracast)
                 <div class="flex flex-wrap justify-center w-full">
                     <div class="max-w-md w-full rounded bg-white overflow-hidden shadow-lg mb-6 mr-4">
