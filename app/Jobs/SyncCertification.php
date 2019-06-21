@@ -17,6 +17,14 @@ use Illuminate\Queue\SerializesModels;
 class SyncCertification implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 1;
+
     /**
      * @var User
      */
@@ -48,7 +56,7 @@ class SyncCertification implements ShouldQueue
                 $certificate->date_of_certification
             );
 
-            if ($status === true && $this->user->certificate->valid === false) {
+            if ($status === true && !$this->user->certificate->valid) {
                 $this->user->certificate->update([
                     'valid' => true,
                 ]);
@@ -60,5 +68,18 @@ class SyncCertification implements ShouldQueue
                 'valid' => false,
             ]);
         }
+    }
+
+    /**
+     * The job failed to process.
+     *
+     * @param  Exception  $exception
+     * @return void
+     */
+    public function failed(Exception $exception)
+    {
+        $this->user->certificate->update([
+            'valid' => false,
+        ]);
     }
 }
