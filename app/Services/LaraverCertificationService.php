@@ -23,7 +23,7 @@ class LaravelCertificateValidationService
         $name = mb_strtolower($name);
         $name = str_replace(' ', '-', $name);
 
-        $this->client = new Client;
+        $this->client = new Client();
         $this->url = sprintf(static::CERT_URL, $name, $date);
         $this->certInfo = $this->getCertificationInfo();
     }
