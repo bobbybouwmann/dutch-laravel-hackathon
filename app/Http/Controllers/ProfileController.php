@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Certificate;
+use App\Forge;
 use App\Http\Requests\ProfileRequest;
+use App\Jobs\SyncCertification;
+use App\Jobs\SyncForge;
+use App\Jobs\SyncLaracast;
+use App\Jobs\SyncPackagist;
 use App\Laracast;
 use App\Package;
 use App\User;
@@ -29,7 +34,7 @@ class ProfileController extends Controller
 
         if ($request->filled('date')) {
             if ($user->certificate instanceof Certificate) {
-                $user->certificate->update(['date_of_certification', $request->get('date')]);
+                $user->certificate->update(['date_of_certification' => $request->get('date')]);
             } else {
                 $user->certificate()->create(['date_of_certification', $request->get('date')]);
             }
@@ -37,7 +42,7 @@ class ProfileController extends Controller
 
         if ($request->filled('laracast')) {
             if ($user->laracast instanceof Laracast) {
-                $user->laracast->update(['username', $request->get('laracast')]);
+                $user->laracast->update(['username' => $request->get('laracast')]);
             } else {
                 $user->laracast()->create(['username', $request->get('laracast')]);
             }
@@ -45,11 +50,25 @@ class ProfileController extends Controller
 
         if ($request->filled('vendor')) {
             if ($user->package instanceof Package) {
-                $user->package->update(['vendor', $request->get('vendor')]);
+                $user->package->update(['vendor' => $request->get('vendor')]);
             } else {
                 $user->package()->create(['vendor', $request->get('vendor')]);
             }
         }
+
+        if ($request->filled('forge')) {
+            if ($user->forge instanceof Forge) {
+                $user->forge->update(['api_token' => $request->get('forge')]);
+            } else {
+                $user->forge()->create(['api_token', $request->get('forge')]);
+            }
+        }
+
+        // Make sure the stats of the user are updated using the queue
+        dispatch(new SyncCertification($user));
+        dispatch(new SyncLaracast($user));
+        dispatch(new SyncPackagist($user));
+        dispatch(new SyncForge($user));
 
         return redirect()->route('profile.edit')->with(['success' => 'true']);
     }
