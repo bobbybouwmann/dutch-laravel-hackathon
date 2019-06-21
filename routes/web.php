@@ -23,6 +23,8 @@ Auth::routes(['verify' => true]);
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
+    Route::get('profile', 'ProfileController@index')->name('profile.index');
+    Route::get('profile/{user}', 'ProfileController@show')->name('profile.show');
     Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::patch('profile/edit', 'ProfileController@update')->name('profile.update');
 });

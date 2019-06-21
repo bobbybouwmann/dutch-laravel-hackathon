@@ -19,6 +19,23 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function index(): View
+    {
+        return $this->show(auth()->user());
+    }
+
+    public function show(User $user): View
+    {
+        $view = view('profile.show');
+
+        $view->user = $user;
+        $view->laracast = $user->laracast;
+        $view->certificate = $user->certificate;
+        //$view->forge = $user->forge;
+
+        return $view;
+    }
+
     public function edit(): View
     {
         /** @var User $user */
