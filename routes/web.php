@@ -14,6 +14,7 @@ declare(strict_types=1);
 */
 
 use App\Services\LaravelCertificateValidationService;
+use App\Services\PackagistExtractor;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,4 +24,8 @@ Route::get('/cert', function () {
     $laravelCertificationInfo = new LaravelCertificateValidationService('Bobby Bouwmann', '2018-01-26');
 
     echo $laravelCertificationInfo->isValid();
+});
+
+Route::get('/packagist/{vendorName}', function (PackagistExtractor $packagistExtractor, string $vendorName) {
+    dd($packagistExtractor->getStatsForVendor($vendorName));
 });
