@@ -29,7 +29,9 @@
                                 <a class="no-underline hover:underline text-gray-300 text-sm p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
                             @endif
                         @else
-                            <span class="text-gray-300 text-sm pr-4">{{ Auth::user()->name }}</span>
+                            <a href="{{ route('profile.index') }}">
+                                <span class="text-gray-300 text-sm pr-4">{{ Auth::user()->name }}</span>
+                            </a>
 
                             <a href="{{ route('logout') }}"
                                class="no-underline hover:underline text-gray-300 text-sm p-3"
