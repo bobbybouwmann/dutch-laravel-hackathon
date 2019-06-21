@@ -64,7 +64,28 @@
                             <div class="ml-2">
                                 <div class="font-bold text-3xl mb-4">Packagist</div>
                                 <p class="text-gray-700 text-base mb-2">
+                                    Vendor name: <span class="font-bold">{{ $user->package->vendor }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Number of packages: <span class="font-bold">{{ $user->package->number_of_packages }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
                                     Github stars: <span class="font-bold">{{ $user->package->github_stars }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Favers: <span class="font-bold">{{ $user->package->favers }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Package dependents: <span class="font-bold">{{ $user->package->package_dependents }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
+                                    All time downloads: <span class="font-bold">{{ $user->package->downloads_total }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Monthly downloads: <span class="font-bold">{{ $user->package->downloads_monthly }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Daily downloads: <span class="font-bold">{{ $user->package->downloads_daily }}</span>
                                 </p>
                             </div>
                         </div>
