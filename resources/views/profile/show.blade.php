@@ -17,7 +17,15 @@
                                 <p class="text-gray-700 text-base mb-2">
                                     Lessons completed: <span class="font-bold">{{ $user->laracast->lessons }}</span>
                                 </p>
-                            </div>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Experience: <span class="font-bold">{{ $user->laracast->experience }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Best replies: <span class="font-bold">{{ $user->laracast->best_replies }}</span>
+                                </p>
+                                <p class="text-gray-700 text-base mb-2">
+                                    Badges: <pspan class="font-bold">{{ $user->laracast->badge_beginner + $user->laracast->badge_intermidiate + $user->laracast->badge_advanced }} / 21</pspan>
+                                </p>
                         </div>
                     </div>
                 </div>
