@@ -6,7 +6,7 @@
             <span class="text-3xl font-normal">{{ $user->name }}</span>
             <p class="mt-6 text-center">
                 <a href="#" class="hover:bg-blue-400 mb-4 inline-block bg-blue-100 rounded-full px-3 py-1 text-sm font-semibold text-blue-900 mr-2">
-                    Laracasts: {{ $user->laracast->experience }}
+                    Laracasts
                 </a>
                 <a href="#" class="hover:bg-blue-400 mb-4 inline-block bg-blue-100 rounded-full px-3 py-1 text-sm font-semibold text-blue-900 mr-2">
                     Packages
