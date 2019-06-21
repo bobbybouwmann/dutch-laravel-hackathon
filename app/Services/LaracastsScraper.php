@@ -37,9 +37,9 @@ class LaracastsScraper
         $matches = $this->match($this->statsRegex());
 
         return [
-            'experience' => $matches[0],
-            'lessons' => $matches[1],
-            'best_replies' => $matches[2],
+            'experience' => intval(str_replace(',', '', $matches[0])),
+            'lessons' => intval(str_replace(',', '', $matches[1])),
+            'best_replies' => intval(str_replace(',', '', $matches[2])),
             'badges' => $this->badges(),
         ];
     }
