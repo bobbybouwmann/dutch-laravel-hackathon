@@ -24,7 +24,7 @@
                                     Best replies: <span class="font-bold">{{ $user->laracast->best_replies }}</span>
                                 </p>
                                 <p class="text-gray-700 text-base mb-2">
-                                    Badges: <pspan class="font-bold">{{ $user->laracast->badge_beginner + $user->laracast->badge_intermidiate + $user->laracast->badge_advanced }} / 21</pspan>
+                                    Badges: <span class="font-bold">{{ $user->laracast->badge_beginner + $user->laracast->badge_intermidiate + $user->laracast->badge_advanced }} / 21</span>
                                 </p>
                         </div>
                     </div>
