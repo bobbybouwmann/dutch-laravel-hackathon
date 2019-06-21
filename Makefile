@@ -58,12 +58,10 @@ else
 endif
 
 do_codestyle:
-	docker-compose exec app vendor/bin/ecs --config=dev/ecs/config.yml check .
-	docker-compose exec app node_modules/.bin/sass-lint -v -q
+	vendor/bin/ecs --config=dev/ecs/config.yml check .
 
 do_codestyle_fix:
-	docker-compose exec app vendor/bin/ecs --config=dev/ecs/config.yml check --fix .
-	docker-compose exec app node_modules/.bin/sass-lint --fix -v -q
+	vendor/bin/ecs --config=dev/ecs/config.yml check --fix .
 
 do_prepare_backend:
 	composer install --prefer-dist --ignore-platform-reqs --no-suggest

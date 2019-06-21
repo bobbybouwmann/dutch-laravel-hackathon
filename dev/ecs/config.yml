@@ -1,0 +1,21 @@
+imports:
+  - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/clean-code.yml' }
+  - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/psr12.yml' }
+
+services:
+  PhpCsFixer\Fixer\Alias\MbStrFunctionsFixer: ~
+  PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer: ~
+  PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer: ~
+  PhpCsFixer\Fixer\NamespaceNotation\BlankLineAfterNamespaceFixer: ~
+  PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer: ~
+  PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer: ~
+  PhpCsFixer\Fixer\Strict\StrictComparisonFixer: ~
+  PhpCsFixer\Fixer\Strict\StrictParamFixer: ~
+  SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff: ~
+
+parameters:
+  exclude_files:
+    - bootstrap/*
+    - public/index.php
+    - storage/*
+    - vendor/*
