@@ -20,12 +20,10 @@ use App\Services\PackagistExtractor;
 Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'verified'])->group(function () {
-
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::patch('profile/edit', 'ProfileController@update')->name('profile.update');
-
 });
 
 Route::get('/cert', function () {
@@ -43,9 +41,7 @@ Route::get('/laracasts/{username}', function (LaracastsScraper $scraper, string 
 });
 
 Route::get('/leaderboard', function () {
-
     $users = App\User::orderBy('larapoints', 'desc')->take(10)->get();
 
     return view('leaderboard', compact('users'));
 });
-
