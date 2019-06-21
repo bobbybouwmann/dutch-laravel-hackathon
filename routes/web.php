@@ -16,8 +16,12 @@ declare(strict_types=1);
 use App\Services\LaravelCertificateValidationService;
 use App\Services\PackagistExtractor;
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes(['verify' => true]);
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+
 });
 
 Route::get('/cert', function () {
