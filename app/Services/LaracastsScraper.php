@@ -19,8 +19,7 @@ class LaracastsScraper
     public function getDataFor(string $username)
     {
         try {
-            $response = $this->client->request('GET', "https://laracasts.com/@{$username}");
-            $this->html = (string) $response->getBody();
+            $this->html = $this->getProfile($username);
         } catch (\Exception $e) {
             return new NullLaracastsScraper();
         }
@@ -85,5 +84,12 @@ class LaracastsScraper
         preg_match_all($regex, $this->html, $matches);
 
         return $matches[1];
+    }
+
+    private function getProfile(string $username)
+    {
+        return (string) $this->client
+            ->request('GET', "https://laracasts.com/@{$username}")
+            ->getBody();
     }
 }
