@@ -8,8 +8,8 @@ use GuzzleHttp\Client;
 
 class LaracastsScraper
 {
-    protected $html;
-    protected $client;
+    private $html;
+    private $client;
 
     public function __construct(Client $client)
     {
