@@ -66,7 +66,7 @@ class LaracastsScraper
 
     private function statsRegex()
     {
-        return '/<strong class="tw-text-white tw-text-2xl tw-block">\n?(\d*,?\d*,?\d*)\n?<\/strong>/is';
+        return '/<strong class="tw-text-white tw-text-2xl tw-block">\r*\n*\s*(\d*,?\d*,?\d*)\r*\n*\s*<\/strong>/is';
     }
 
     private function awardedBadgesRegex()
