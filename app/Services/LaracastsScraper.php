@@ -11,9 +11,9 @@ class LaracastsScraper
     private $html;
     private $client;
 
-    public function __construct(Client $client)
+    public function __construct($client = null)
     {
-        $this->client = $client;
+        $this->client = $client ?? new Client();
     }
 
     public function getDataFor(string $username)
