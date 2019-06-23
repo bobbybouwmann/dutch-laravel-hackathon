@@ -5,14 +5,14 @@ namespace Tests\Unit\Services;
 use App\Services\LaracastsScraper;
 use App\Services\NullLaracastsScraper;
 use GuzzleHttp\Client;
+use Illuminate\Support\Collection;
 use Mockery;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LaracastsScraperTest extends TestCase
 {
-    protected $laracastsScraper;
-    protected $profile;
+    protected $scraper;
+    protected $stub;
     protected $mockedClient;
     protected $fakeScraper;
     protected $statistics;
@@ -21,31 +21,34 @@ class LaracastsScraperTest extends TestCase
     {
         parent::setUp();
 
-        $this->laracastsScraper = new LaracastsScraper;
-
-        $this->mockedClient = Mockery::mock(new Client());
-
-        $this->fakeScraper = new LaracastsScraper($this->mockedClient);
-
-        $this->profile = file_get_contents(
+        $this->stub = file_get_contents(
             base_path('tests/Unit/Services/stubs/laracasts-profile.html')
         );
+
+        $this->mockedClient = Mockery::mock(new Client());
 
         $this->mockedClient
             ->shouldReceive('request')
             ->andReturnSelf()
             ->shouldReceive('getBody')
-            ->andReturn($this->profile);
-
-        $this->statistics = $this->fakeScraper->getDataFor('')->statistics();
+            ->andReturn($this->stub);
     }
 
     /** @test */
-    function it_returns_a_null_object_when_the_user_is_not_found()
+    function if_a_user_is_not_found_a_null_object_is_returned()
     {
-        $data = $this->laracastsScraper->getDataFor('not-existing-user');
+        $laracastsScraper = resolve(LaracastsScraper::class);
 
-        $this->assertTrue($data instanceof NullLaracastsScraper);
+        $this->assertInstanceOf(
+            NullLaracastsScraper::class,
+            $laracastsScraper->getDataFor('not-existing-user')
+        );
+    }
+
+    /** @test */
+    function it_returns_0_for_every_property_if_a_user_was_not_found()
+    {
+        $data = $this->getStatisticsFor('not-existing-user');
 
         $result = [
             'experience' => 0,
@@ -60,48 +63,116 @@ class LaracastsScraperTest extends TestCase
             ]
         ];
 
-        $this->assertEquals($result, $data->statistics());
+        $this->assertEquals($result, $data);
     }
 
     /** @test */
     function it_returns_the_experience_points()
     {
-        $this->assertEquals(97720, $this->statistics['experience']);
+        $this->mockClient();
+
+        $this->assertStatistics(97720, 'experience');
     }
 
     /** @test */
     function it_returns_the_number_of_completed_lessons()
     {
-        $this->assertEquals(771, $this->statistics['lessons']);
+        $this->mockClient();
+
+        $this->assertStatistics(771, 'lessons');
     }
 
     /** @test */
     function it_returns_the_number_of_best_replies()
     {
-        $this->assertEquals(33, $this->statistics['best_replies']);
+        $this->mockClient();
+
+        $this->assertStatistics(33, 'best_replies');
     }
 
     /** @test */
     function it_returns_the_number_of_obtained_badges()
     {
-        $this->assertEquals(10, $this->statistics['badges']['total']);
+        $this->mockClient();
+
+        $this->assertStatistics(10, 'badges.total');
     }
 
     /** @test */
     function it_returns_the_number_of_beginner_bages()
     {
-        $this->assertEquals(9, $this->statistics['badges']['beginner']);
+        $this->mockClient();
+
+        $this->assertStatistics(9, 'badges.beginner');
     }
 
     /** @test */
     function it_returns_the_number_of_intermediate_badges()
     {
-        $this->assertEquals(1, $this->statistics['badges']['intermediate']);
+        $this->mockClient();
+
+        $this->assertStatistics(1, 'badges.intermediate');
     }
 
     /** @test */
     function it_returns_the_number_of_advanced_badges()
     {
-        $this->assertEquals(0, $this->statistics['badges']['advanced']);
+        $this->mockClient();
+
+        $this->assertStatistics(0, 'badges.advanced');
+    }
+
+    /**
+     * Put a Mockery instance of GuzzleHttp Client
+     * into the service container
+     *
+     * @return void
+     */
+    private function mockClient(): void
+    {
+        app()->instance(Client::class, $this->mockedClient);
+    }
+
+    /**
+     * Collect data for a Laracasts User
+     *
+     * @param string $username
+     * @return array
+     */
+    private function getStatisticsFor(string $username): array
+    {
+        return resolve(LaracastsScraper::class)
+            ->getDataFor($username)
+            ->statistics();
+    }
+
+    /**
+     * Wrapper around assertEquals
+     * Allowing for nested array values
+     *
+     * @param int $expectedValue
+     * @param string $keys
+     */
+    private function assertStatistics(int $expectedValue, string $keys)
+    {
+        $result = $this->collectNestedKeys($keys)
+            ->reduce(function ($data, $key) {
+                return $data[$key];
+            }, $this->getStatisticsFor('test-user'));
+
+        $this->assertEquals($expectedValue, $result);
+    }
+
+    /**
+     * Collect nested array keys, separated by a '.'
+     * Example: 'nested.keys' will yield ['nested', 'keys']
+     * Which will be returned as a collection
+     *
+     * @param string $keys
+     * @return Collection
+     */
+    private function collectNestedKeys(string $keys): Collection
+    {
+        return collect(explode('.', $keys));
     }
 }
