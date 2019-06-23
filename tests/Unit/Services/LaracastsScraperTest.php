@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Services;
 
 use App\Services\LaracastsScraper;
@@ -35,7 +37,7 @@ class LaracastsScraperTest extends TestCase
     }
 
     /** @test */
-    function if_a_user_is_not_found_a_null_object_is_returned()
+    public function if_a_user_is_not_found_a_null_object_is_returned()
     {
         $laracastsScraper = resolve(LaracastsScraper::class);
 
@@ -46,7 +48,7 @@ class LaracastsScraperTest extends TestCase
     }
 
     /** @test */
-    function it_returns_0_for_every_property_if_a_user_was_not_found()
+    public function it_returns_0_for_every_property_if_a_user_was_not_found()
     {
         $data = $this->getStatisticsFor('not-existing-user');
 
@@ -67,7 +69,7 @@ class LaracastsScraperTest extends TestCase
     }
 
     /** @test */
-    function it_returns_the_experience_points()
+    public function it_returns_the_experience_points()
     {
         $this->mockClient();
 
@@ -75,7 +77,7 @@ class LaracastsScraperTest extends TestCase
     }
 
     /** @test */
-    function it_returns_the_number_of_completed_lessons()
+    public function it_returns_the_number_of_completed_lessons()
     {
         $this->mockClient();
 
@@ -83,7 +85,7 @@ class LaracastsScraperTest extends TestCase
     }
 
     /** @test */
-    function it_returns_the_number_of_best_replies()
+    public function it_returns_the_number_of_best_replies()
     {
         $this->mockClient();
 
@@ -91,7 +93,7 @@ class LaracastsScraperTest extends TestCase
     }
 
     /** @test */
-    function it_returns_the_number_of_obtained_badges()
+    public function it_returns_the_number_of_obtained_badges()
     {
         $this->mockClient();
 
@@ -99,7 +101,7 @@ class LaracastsScraperTest extends TestCase
     }
 
     /** @test */
-    function it_returns_the_number_of_beginner_bages()
+    public function it_returns_the_number_of_beginner_bages()
     {
         $this->mockClient();
 
@@ -107,7 +109,7 @@ class LaracastsScraperTest extends TestCase
     }
 
     /** @test */
-    function it_returns_the_number_of_intermediate_badges()
+    public function it_returns_the_number_of_intermediate_badges()
     {
         $this->mockClient();
 
@@ -115,7 +117,7 @@ class LaracastsScraperTest extends TestCase
     }
 
     /** @test */
-    function it_returns_the_number_of_advanced_badges()
+    public function it_returns_the_number_of_advanced_badges()
     {
         $this->mockClient();
 
