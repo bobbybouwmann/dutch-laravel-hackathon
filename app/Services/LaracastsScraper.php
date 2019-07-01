@@ -8,8 +8,8 @@ use GuzzleHttp\Client;
 
 class LaracastsScraper
 {
-    protected $html;
-    protected $client;
+    private $html;
+    private $client;
 
     public function __construct(Client $client)
     {
@@ -19,8 +19,7 @@ class LaracastsScraper
     public function getDataFor(string $username)
     {
         try {
-            $response = $this->client->request('GET', "https://laracasts.com/@{$username}");
-            $this->html = (string) $response->getBody();
+            $this->html = $this->getProfile($username);
         } catch (\Exception $e) {
             return new NullLaracastsScraper();
         }
@@ -67,7 +66,7 @@ class LaracastsScraper
 
     private function statsRegex()
     {
-        return '/<strong class="tw-text-white tw-text-2xl tw-block">\n?(\d*,?\d*,?\d*)\n?<\/strong>/is';
+        return '/<strong class="tw-text-white tw-text-2xl tw-block">\r*\n*\s*(\d*,?\d*,?\d*)\r*\n*\s*<\/strong>/is';
     }
 
     private function awardedBadgesRegex()
@@ -85,5 +84,12 @@ class LaracastsScraper
         preg_match_all($regex, $this->html, $matches);
 
         return $matches[1];
+    }
+
+    private function getProfile(string $username)
+    {
+        return (string) $this->client
+            ->request('GET', "https://laracasts.com/@{$username}")
+            ->getBody();
     }
 }
