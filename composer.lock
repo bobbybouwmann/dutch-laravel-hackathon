@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "0d26a6d9333e1f60107997ae3f0773eb",
@@ -325,25 +325,25 @@
         },
         {
             "name": "fideloper/proxy",
-            "version": "4.1.0",
+            "version": "4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fideloper/TrustedProxy.git",
-                "reference": "177c79a2d1f9970f89ee2fb4c12b429af38b6dfb"
+                "reference": "c073b2bd04d1c90e04dc1b787662b558dd65ade0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/177c79a2d1f9970f89ee2fb4c12b429af38b6dfb",
-                "reference": "177c79a2d1f9970f89ee2fb4c12b429af38b6dfb",
+                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/c073b2bd04d1c90e04dc1b787662b558dd65ade0",
+                "reference": "c073b2bd04d1c90e04dc1b787662b558dd65ade0",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "~5.0",
+                "illuminate/contracts": "^5.0|^6.0|^7.0|^8.0|^9.0",
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "illuminate/http": "~5.6",
-                "mockery/mockery": "~1.0",
+                "illuminate/http": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "mockery/mockery": "^1.0",
                 "phpunit/phpunit": "^6.0"
             },
             "type": "library",
@@ -375,7 +375,7 @@
                 "proxy",
                 "trusted proxy"
             ],
-            "time": "2019-01-10T14:06:47+00:00"
+            "time": "2020-10-22T13:48:01+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -600,6 +600,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -646,6 +647,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -1129,6 +1131,7 @@
                 "bcmath",
                 "math"
             ],
+            "abandoned": "brick/math",
             "time": "2017-02-16T16:54:46+00:00"
         },
         {
@@ -1403,12 +1406,12 @@
             "version": "v1.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nrk/predis.git",
+                "url": "https://github.com/predis/predis.git",
                 "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "url": "https://api.github.com/repos/predis/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
                 "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
                 "shasum": ""
             },
@@ -1445,6 +1448,16 @@
                 "nosql",
                 "predis",
                 "redis"
+            ],
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/tillkruss",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tillkruss",
+                    "type": "github"
+                }
             ],
             "time": "2016-06-16T16:22:20+00:00"
         },
@@ -1816,17 +1829,17 @@
             ],
             "authors": [
                 {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                },
+                {
                     "name": "Marijn Huizendveld",
                     "email": "marijn.huizendveld@gmail.com"
                 },
                 {
                     "name": "Thibaud Fabre",
                     "email": "thibaud@aztech.io"
-                },
-                {
-                    "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
                 }
             ],
             "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
@@ -5315,6 +5328,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2018-10-30T05:52:18+00:00"
         },
         {
@@ -6796,6 +6810,7 @@
                 "MIT"
             ],
             "description": "Slim wrapper around phpstan/phpdoc-parser with format preserving printer",
+            "abandoned": "rector/rector",
             "time": "2019-03-05T23:15:04+00:00"
         },
         {
@@ -6803,12 +6818,12 @@
             "version": "v5.4.16",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Symplify/CodingStandard.git",
+                "url": "https://github.com/symplify/coding-standard.git",
                 "reference": "72a3b03f21be6c978a90ad567a29bd9261df0dfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/CodingStandard/zipball/72a3b03f21be6c978a90ad567a29bd9261df0dfa",
+                "url": "https://api.github.com/repos/symplify/coding-standard/zipball/72a3b03f21be6c978a90ad567a29bd9261df0dfa",
                 "reference": "72a3b03f21be6c978a90ad567a29bd9261df0dfa",
                 "shasum": ""
             },
@@ -6845,6 +6860,16 @@
                 "MIT"
             ],
             "description": "Set of Symplify rules for PHP_CodeSniffer and PHP CS Fixer.",
+            "funding": [
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/rectorphp",
+                    "type": "patreon"
+                }
+            ],
             "time": "2019-03-05T23:15:04+00:00"
         },
         {
@@ -6852,12 +6877,12 @@
             "version": "v5.4.16",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Symplify/EasyCodingStandard.git",
+                "url": "https://github.com/symplify/easy-coding-standard.git",
                 "reference": "66ed360e0b81881336c7339989dce3b0c14509e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/EasyCodingStandard/zipball/66ed360e0b81881336c7339989dce3b0c14509e9",
+                "url": "https://api.github.com/repos/symplify/easy-coding-standard/zipball/66ed360e0b81881336c7339989dce3b0c14509e9",
                 "reference": "66ed360e0b81881336c7339989dce3b0c14509e9",
                 "shasum": ""
             },
@@ -6908,6 +6933,16 @@
                 "MIT"
             ],
             "description": "Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer.",
+            "funding": [
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/rectorphp",
+                    "type": "patreon"
+                }
+            ],
             "time": "2019-03-05T23:15:04+00:00"
         },
         {
@@ -6915,12 +6950,12 @@
             "version": "v5.4.16",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Symplify/PackageBuilder.git",
+                "url": "https://github.com/symplify/package-builder.git",
                 "reference": "20e04ad9cd15a53527807a62c8b244d8a114f779"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Symplify/PackageBuilder/zipball/20e04ad9cd15a53527807a62c8b244d8a114f779",
+                "url": "https://api.github.com/repos/symplify/package-builder/zipball/20e04ad9cd15a53527807a62c8b244d8a114f779",
                 "reference": "20e04ad9cd15a53527807a62c8b244d8a114f779",
                 "shasum": ""
             },
@@ -6956,6 +6991,16 @@
                 "MIT"
             ],
             "description": "Dependency Injection, Console and Kernel toolkit for Symplify packages.",
+            "funding": [
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/rectorphp",
+                    "type": "patreon"
+                }
+            ],
             "time": "2019-03-03T15:32:34+00:00"
         },
         {
@@ -7059,5 +7104,6 @@
         "php": "^7.1.3",
         "ext-json": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
